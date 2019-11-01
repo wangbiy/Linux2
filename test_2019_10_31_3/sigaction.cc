@@ -3,10 +3,21 @@
 #include <sys/types.h>
 void handler(int sig)
 {
-	std::cout <<"catch sig"<< sig << std::endl;
+	switch(sig)
+	{
+		case 2:
+			std::cout <<"catch sig"<< sig << std::endl;
+			break;
+		case 3:
+			std::cout <<"catch sig" << sig << std::endl;
+			break;
+		default:
+			break;
+	}
 }
 int main()
 {
+	signal(3,handler);//对3号信号处理
 	struct sigaction act, oact;
 	act.sa_handler=handler;
 	sigemptyset(&act.sa_mask);
