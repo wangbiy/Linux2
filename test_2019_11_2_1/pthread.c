@@ -43,21 +43,20 @@ void* rout(void* arg)
 {
     while(1)
     {
-        srand((unsigned long)time(NULL));
-        printf("I am thread 1:%d\n",getpid());
-        int time=rand()%10;
+        printf("I am thread 1:%s\n",(char*)arg);
         sleep(1);
+        break;
     }
+//    return (void*)11;
+    pthread_exit((void*)3);//线程终止
 }
 int main()
 {
     pthread_t tid;
-    int ret;
     pthread_create(&tid,NULL,rout,(void*)"thread 1");
-    while(1)
-    {
-        printf("I am main thread:%lu\n",tid);
-        sleep(1);
-    }
+    printf("I am main thread:%p\n",tid);
+    void* ret;
+    pthread_join(tid,&ret);//线程等待，以阻塞方式等待
+    printf("ret:%d\n",(int)ret);
     return 0;
 }
