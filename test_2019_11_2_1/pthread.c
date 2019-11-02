@@ -47,7 +47,6 @@ void* rout(void* arg)
         printf("I am thread 1:%d\n",getpid());
         int time=rand()%10;
         sleep(1);
-        int a=10/0;
     }
 }
 int main()
@@ -55,13 +54,9 @@ int main()
     pthread_t tid;
     int ret;
     pthread_create(&tid,NULL,rout,(void*)"thread 1");
-    pthread_create(&tid,NULL,rout,(void*)"thread 2");
-    pthread_create(&tid,NULL,rout,(void*)"thread 3");
-    pthread_create(&tid,NULL,rout,(void*)"thread 4");
-    pthread_create(&tid,NULL,rout,(void*)"thread 5");
     while(1)
     {
-        printf("I am main thread:%d\n",getpid());
+        printf("I am main thread:%lu\n",tid);
         sleep(1);
     }
     return 0;
