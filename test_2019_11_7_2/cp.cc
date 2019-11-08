@@ -125,4 +125,5 @@ int main()
 
     pthread_join(p,NULL);
     pthread_join(c,NULL);
+    delete bq;
 }
